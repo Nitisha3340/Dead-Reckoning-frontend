@@ -3,14 +3,42 @@ node_modules/
 **/node_modules/
 package-lock.json
 
-# Android / Capacitor generated build artifacts
-**/android/.gradle/
+# Generated Android / Gradle artifacts
+**/.gradle/
+**/build/
+**/captures/
+**/local.properties
+**/.idea/
+**/*.iml
+**/android/**/.gradle/
 **/android/**/build/
-**/android/app/build/
-**/android/build/
+**/android/**/generated/
+**/android/**/intermediates/
+**/android/**/outputs/
+**/android/**/obj/
+**/android/**/bin/
+**/android/**/tmp/
 **/android/capacitor-cordova-android-plugins/build/
-**/android/local.properties
-**/android/.idea/
+
+# Keep real Android and Capacitor source/config files tracked
+!**/android/
+!**/android/*.gradle
+!**/android/*.properties
+!**/android/gradlew
+!**/android/gradlew.bat
+!**/android/settings.gradle
+!**/android/variables.gradle
+!**/android/capacitor.settings.gradle
+!**/android/gradle/
+!**/android/gradle/wrapper/
+!**/android/gradle/wrapper/**
+!**/android/app/
+!**/android/app/*.gradle
+!**/android/app/*.pro
+!**/android/app/src/
+!**/android/app/src/**
+!**/android/capacitor-cordova-android-plugins/
+!**/android/capacitor-cordova-android-plugins/**
 
 # IDE / OS clutter
 .DS_Store
