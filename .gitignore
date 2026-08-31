@@ -1,0 +1,23 @@
+# Node / package tooling
+node_modules/
+**/node_modules/
+package-lock.json
+
+# Android / Capacitor generated build artifacts
+**/android/.gradle/
+**/android/**/build/
+**/android/app/build/
+**/android/build/
+**/android/capacitor-cordova-android-plugins/build/
+**/android/local.properties
+**/android/.idea/
+
+# IDE / OS clutter
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs and temp files
+*.log
+*.tmp
