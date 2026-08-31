@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dead Reckoning — AI Navigation That Doesn't Get Lost</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <svg class="compass" id="compass" viewBox="0 0 40 40" width="30" height="30">
+      <circle cx="20" cy="20" r="17" stroke="#F5A623" stroke-width="1.5" fill="none"/>
+      <polygon points="20,6 24,20 20,34 16,20" fill="#F5A623"/>
+    </svg>
+    <div>
+      <h1>DEAD RECKONING</h1>
+      <span class="subtitle">Navigation that keeps working when GPS can't</span>
+    </div>
+  </div>
+  <div class="status-pill" id="status-pill">
+    <span class="dot"></span> <span id="status-text">STANDBY</span>
+  </div>
+</header>
+
+<div class="explainer">
+  <span class="explainer-badge">THE PROBLEM</span>
+  <p>GPS drops out in tunnels, dense cities, and jammed environments. The old fix — <b>dead reckoning</b> — just guesses forward from your last known speed and direction, and drifts further off course the longer signal stays lost. Our model learns from real sensor data to correct that drift <b>while it's happening</b>, not after.</p>
+</div>
+
+<main class="dashboard">
+  <section class="map-panel">
+    <div class="legend-overlay">
+      <span><i style="background:#2DD4BF"></i> True GPS path</span>
+      <span><i style="background:#F0483E"></i> Old method (drifts)</span>
+      <span><i style="background:#F5A623"></i> Our AI (stays on track)</span>
+    </div>
+    <div id="map"></div>
+    <div class="control-row" id="control-row">
+      <button id="demo-btn" class="ctrl-btn amber">▶ RUN DEMO</button>
+      <button id="live-btn" class="ctrl-btn teal">📡 GO LIVE</button>
+    </div>
+    <button id="sim-loss-btn" class="ctrl-btn red" style="display:none">⚠ SIMULATE GPS LOSS</button>
+  </section>
+
+  <aside class="telemetry-panel">
+
+    <div class="drift-block">
+      <span class="label">Position error right now</span>
+      <div id="drift-value">0.0 <small>m</small></div>
+      <span class="sublabel">How far our AI's estimate is from the real GPS location</span>
+    </div>
+
+    <div class="confidence-block">
+      <span class="label">System confidence <span class="value-pill" id="improvement-value">--%</span></span>
+      <div class="confidence-meter" id="confidence-meter"></div>
+      <span class="sublabel">How much better we're tracking than the old method, right now</span>
+    </div>
+
+    <div class="coord-readout">
+      <div>
+        <span class="label">True position (GPS)</span>
+        <div id="true-coord">—</div>
+      </div>
+      <div>
+        <span class="label">Our AI's estimate</span>
+        <div id="ai-coord">—</div>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div>
+        <span class="label">Heading</span>
+        <div id="heading-value">0°</div>
+      </div>
+      <div>
+        <span class="label">Satellites</span>
+        <div id="sat-value">0</div>
+      </div>
+    </div>
+
+    <canvas id="driftChart" height="140"></canvas>
+
+    <details class="how-it-works">
+      <summary>How this works, in 3 steps</summary>
+      <ol>
+        <li>Phone/vehicle sensors (accelerometer + gyroscope) record motion continuously.</li>
+        <li>A trained neural network turns raw sensor readings into a speed + heading estimate, correcting for sensor bias the way classic physics formulas can't.</li>
+        <li>An Extended Kalman Filter blends that estimate with GPS when available, and leans on it fully during outages — snapping back to GPS the instant signal returns.</li>
+      </ol>
+    </details>
+
+    <div class="event-log-wrap">
+      <span class="label">Live event log</span>
+      <ul id="event-log"></ul>
+    </div>
+  </aside>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

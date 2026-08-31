@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">NAVIQ</string>
+    <string name="title_activity_main">NAVIQ</string>
+    <string name="package_name">com.naviq.navigation</string>
+    <string name="custom_url_scheme">com.naviq.navigation</string>
+</resources>

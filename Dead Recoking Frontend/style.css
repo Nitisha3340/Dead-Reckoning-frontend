@@ -1,0 +1,39 @@
+body {
+  background-color: #111;
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+#map {
+  height: 500px;
+  width: 90%;
+  margin: 20px auto;
+  border-radius: 8px;
+}.dashboard-container {
+  display: flex;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+#map {
+  height: 500px;
+  flex: 3;
+  border-radius: 8px;
+}
+
+.stats-panel {
+  flex: 1;
+  background: #1c1c1c;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+#drift-value {
+  font-size: 32px;
+  font-weight: bold;
+  color: #4ea1ff;
+  margin: 10px 0 20px;
+}
